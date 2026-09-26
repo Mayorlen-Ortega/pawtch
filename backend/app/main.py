@@ -10,7 +10,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .locations import LOCATIONS, get_location
 from .matching import calculate_match
-from .storage import IMAGES_DIR, ensure_storage, read_matches, read_reports, save_image, write_match, write_report
+from .storage import IMAGES_DIR, delete_image, ensure_storage, read_matches, read_reports, save_image, write_match, write_report
 
 app = FastAPI(title="Huella Cerca API")
 app.add_middleware(
@@ -78,17 +78,21 @@ async def create_report(report: str = Form(...), photo: UploadFile = File(...)) 
         "createdAt": datetime.now(timezone.utc).isoformat(),
     }
     pending_matches = []
-    if saved["type"] == "found":
-        for lost in (item for item in read_reports() if item["type"] == "lost"):
-            result = calculate_match(lost, saved, IMAGES_DIR)
-            if result["isPossibleMatch"]:
-                pending_matches.append({
-                    "id": f"match-{len(read_matches()) + 1:03d}",
-                    "lostReportId": lost["id"],
-                    "foundReportId": saved["id"],
-                    **result,
-                    "createdAt": datetime.now(timezone.utc).isoformat(),
-                })
+    try:
+        if saved["type"] == "found":
+            for lost in (item for item in read_reports() if item["type"] == "lost"):
+                result = calculate_match(lost, saved, IMAGES_DIR)
+                if result["isPossibleMatch"]:
+                    pending_matches.append({
+                        "id": f"match-{len(read_matches()) + 1:03d}",
+                        "lostReportId": lost["id"],
+                        "foundReportId": saved["id"],
+                        **result,
+                        "createdAt": datetime.now(timezone.utc).isoformat(),
+                    })
+    except Exception as exc:
+        delete_image(image_name)
+        raise HTTPException(status_code=503, detail="We could not analyze that photo locally. Please try another image or check the local model setup.") from exc
     write_report(saved)
     first_match_number = len(read_matches()) + 1
     for offset, match in enumerate(pending_matches):

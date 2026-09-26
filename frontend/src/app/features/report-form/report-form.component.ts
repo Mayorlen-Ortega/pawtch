@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
@@ -57,7 +58,12 @@ export class ReportFormComponent implements OnInit {
     const payload = { type: this.type, ...this.form.getRawValue() };
     this.api.createReport(payload, this.photo).subscribe({
       next: (report) => this.router.navigate(['/reports', report.id], { queryParams: { created: '1' } }),
-      error: () => { this.submitting = false; this.submitError = 'We could not save this report. Please try again; your entries are still here.'; },
+      error: (error: HttpErrorResponse) => {
+        this.submitting = false;
+        this.submitError = error.status === 503
+          ? 'We could not use that photo for matching locally. Please try another image; your entries are still here.'
+          : 'We could not save this report. Please try again; your entries are still here.';
+      },
     });
   }
 }

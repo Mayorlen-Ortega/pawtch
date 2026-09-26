@@ -39,7 +39,7 @@ Build mode: learn
   Learner check: Open a possible match and select `Compare reports`. Resize the browser or use a narrow viewport, then confirm the two animals remain easy to compare and the evidence remains understandable.
   Commit: `Add responsive report comparison`
 
-- [ ] **4. Harden the demo and document the run**
+- [x] **4. Harden the demo and document the run**
   Becomes usable: A fresh checkout can be started locally, seeded with a small demo dataset if needed, and used to demonstrate the complete lost-to-found matching journey with clear empty, validation, photo, and model-error states.
   Why now: The core product is already usable; this final slice makes the proof reproducible, verifies the full journey, and closes the gaps that could undermine the recording.
   PRD ref: `prd.md > The Core Journey`; `prd.md > Validation and recovery`; `prd.md > States and Boundaries`; `prd.md > What We're Building`; `scope.md > What "Working" Looks Like`
@@ -52,7 +52,7 @@ Build mode: learn
 ## Hands-on Checkpoints
 
 - [x] Early usable behavior explored — slice 1 learner check completed; slice 2 evidence checkpoint approved after reviewing the working possible-match card and matching policy.
-- [ ] Final kick-the-tires exploration and feedback completed — after slice 4, run the complete demo, test awkward inputs and responsive layouts, and report any revisions.
+- [x] Final kick-the-tires exploration and feedback completed — the learner completed the clean-data lost/found match and comparison flow, reviewed desktop/mobile behavior, tested invalid image handling, and approved the final Slice 4 check.
 
 ## Final Review
 

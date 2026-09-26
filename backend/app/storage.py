@@ -48,6 +48,10 @@ def save_image(filename: str, contents: bytes) -> str:
     return safe_name
 
 
+def delete_image(filename: str) -> None:
+    (IMAGES_DIR / filename).unlink(missing_ok=True)
+
+
 def read_matches() -> list[dict]:
     return read_json(MATCHES_FILE)
 
