@@ -19,7 +19,7 @@ Build mode: learn
   Learner check: Open the local app, choose each report path, submit one complete report, and try one missing required field. Confirm the detail page appears and the form keeps what you typed when validation fails.
   Commit: `Build report creation and detail flow`
 
-- [ ] **2. Surface an explainable possible match**
+- [x] **2. Surface an explainable possible match**
   Becomes usable: When a found report is submitted alongside a compatible lost report, the lost report detail page shows a `Possible match` card with the other photo, a similarity or match indication, and separate visual, physical, geographic, and date evidence.
   Why now: This is the unique kernel and the highest technical risk. Bringing local CLIP and the scoring policy into the working journey now tests the central idea before polishing secondary surfaces.
   PRD ref: `prd.md > Possible-match discovery`; `prd.md > States and Boundaries`; `prd.md > What We're Building`
@@ -51,7 +51,7 @@ Build mode: learn
 
 ## Hands-on Checkpoints
 
-- [x] Early usable behavior explored — slice 1 learner check completed; the slice 2 evidence checkpoint remains planned after the matching kernel.
+- [x] Early usable behavior explored — slice 1 learner check completed; slice 2 evidence checkpoint approved after reviewing the working possible-match card and matching policy.
 - [ ] Final kick-the-tires exploration and feedback completed — after slice 4, run the complete demo, test awkward inputs and responsive layouts, and report any revisions.
 
 ## Final Review

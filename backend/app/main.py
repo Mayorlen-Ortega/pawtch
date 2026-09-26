@@ -9,7 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from .locations import LOCATIONS, get_location
-from .storage import IMAGES_DIR, ensure_storage, read_matches, read_reports, save_image, write_report
+from .matching import calculate_match
+from .storage import IMAGES_DIR, ensure_storage, read_matches, read_reports, save_image, write_match, write_report
 
 app = FastAPI(title="Huella Cerca API")
 app.add_middleware(
@@ -76,7 +77,23 @@ async def create_report(report: str = Form(...), photo: UploadFile = File(...)) 
         "date": payload["date"],
         "createdAt": datetime.now(timezone.utc).isoformat(),
     }
+    pending_matches = []
+    if saved["type"] == "found":
+        for lost in (item for item in read_reports() if item["type"] == "lost"):
+            result = calculate_match(lost, saved, IMAGES_DIR)
+            if result["isPossibleMatch"]:
+                pending_matches.append({
+                    "id": f"match-{len(read_matches()) + 1:03d}",
+                    "lostReportId": lost["id"],
+                    "foundReportId": saved["id"],
+                    **result,
+                    "createdAt": datetime.now(timezone.utc).isoformat(),
+                })
     write_report(saved)
+    first_match_number = len(read_matches()) + 1
+    for offset, match in enumerate(pending_matches):
+        match["id"] = f"match-{first_match_number + offset:03d}"
+        write_match(match)
     return public_report(saved)
 
 
@@ -90,6 +107,14 @@ def get_report(report_id: str) -> dict:
 
 @app.get("/api/reports/{report_id}/matches")
 def matches(report_id: str) -> list[dict]:
-    if not any(item["id"] == report_id for item in read_reports()):
+    reports_by_id = {item["id"]: item for item in read_reports()}
+    if report_id not in reports_by_id:
         raise HTTPException(status_code=404, detail="Report not found.")
-    return [item for item in read_matches() if item.get("lostReportId") == report_id or item.get("foundReportId") == report_id]
+    result = []
+    for item in read_matches():
+        if item.get("lostReportId") != report_id and item.get("foundReportId") != report_id:
+            continue
+        other_id = item["foundReportId"] if item["lostReportId"] == report_id else item["lostReportId"]
+        other = reports_by_id[other_id]
+        result.append({**item, "otherReport": public_report(other)})
+    return result

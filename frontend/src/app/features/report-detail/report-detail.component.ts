@@ -2,14 +2,14 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
-import { Report } from '../../core/models';
+import { Match, Report } from '../../core/models';
 
 @Component({ selector: 'app-report-detail', imports: [CommonModule, RouterLink], templateUrl: './report-detail.component.html', styleUrl: './report-detail.component.scss' })
 export class ReportDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly api = inject(ApiService);
   readonly report = signal<Report | undefined>(undefined);
-  readonly matches = signal<unknown[]>([]);
+  readonly matches = signal<Match[]>([]);
   readonly created = signal(false);
   readonly loading = signal(true);
   readonly error = signal('');

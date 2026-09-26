@@ -16,4 +16,14 @@ h1 { margin: .7rem 0 .6rem; font-size: clamp(2.3rem, 5vw, 4rem); line-height: 1;
 .empty-state span { color: var(--green); font-size: 2rem; }
 .empty-state h2, .match-placeholder h2 { margin: .7rem 0; }
 .empty-state p, .match-placeholder p, .loading { color: var(--muted); }
+.match-card { display: grid; grid-template-columns: minmax(180px, .7fr) 1fr; gap: 1.4rem; padding: 1rem; border: 1px solid #c8ded2; border-radius: 1rem; background: #f0f7f1; }
+.match-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: .75rem; }
+.match-content { padding: .5rem; }
+.match-label { color: var(--green); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.match-content h2 { margin: .5rem 0; }
+.match-score { color: var(--green-dark); font-size: 1.7rem; font-weight: 800; }
+.match-score span { color: var(--muted); font-size: .85rem; font-weight: 600; }
+.match-content ul { padding-left: 1.15rem; color: var(--muted); line-height: 1.6; }
+.compare-button { border: 0; border-radius: .7rem; padding: .75rem 1rem; color: white; background: var(--green); font-weight: 800; }
 @media (max-width: 650px) { .report-card { grid-template-columns: 1fr; } }
+@media (max-width: 650px) { .match-card { grid-template-columns: 1fr; } }

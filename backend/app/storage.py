@@ -50,3 +50,9 @@ def save_image(filename: str, contents: bytes) -> str:
 
 def read_matches() -> list[dict]:
     return read_json(MATCHES_FILE)
+
+
+def write_match(match: dict) -> None:
+    matches = read_matches()
+    matches.append(match)
+    write_json(MATCHES_FILE, matches)

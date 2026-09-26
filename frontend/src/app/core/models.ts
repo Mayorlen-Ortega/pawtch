@@ -21,3 +21,17 @@ export interface Report {
   date: string;
   createdAt: string;
 }
+
+export interface Match {
+  id: string;
+  lostReportId: string;
+  foundReportId: string;
+  visualScore: number;
+  physicalScore: number;
+  geographicScore: number;
+  dateScore: number;
+  weightedIndication: number;
+  isPossibleMatch: boolean;
+  explanations: string[];
+  otherReport: Report;
+}
