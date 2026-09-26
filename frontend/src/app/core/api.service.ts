@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LocationOption, Match, Report } from './models';
+import { LocationOption, Match, MatchComparison, Report } from './models';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -25,6 +25,10 @@ export class ApiService {
 
   getMatches(id: string): Observable<Match[]> {
     return this.http.get<Match[]>(`${this.baseUrl}/reports/${id}/matches`);
+  }
+
+  getMatch(id: string): Observable<MatchComparison> {
+    return this.http.get<MatchComparison>(`${this.baseUrl}/matches/${id}`);
   }
 
   imageUrl(filename: string): string {

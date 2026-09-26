@@ -1,0 +1,52 @@
+<main class="page comparison-page">
+  <a class="back-link" *ngIf="comparison() as match" [routerLink]="['/reports', match.lostReportId]">← Back to report</a>
+  <ng-container *ngIf="comparison() as match; else loadingState">
+    <header class="comparison-header">
+      <p class="eyebrow">Review the details together</p>
+      <h1>Compare reports</h1>
+      <p>Look at the two reports side by side, then decide what you think.</p>
+    </header>
+    <section class="report-pair" aria-label="Lost and found reports">
+      <article class="report-column">
+        <p class="report-label">{{ label(match.lostReport) }}</p>
+        <figure class="photo-slot"><img class="pet-photo" [src]="imageUrl(match.lostReport.photo)" alt="Lost pet report photo" /><figcaption>Lost report photo</figcaption></figure>
+        <h2>{{ displayName(match.lostReport) }}</h2>
+        <dl>
+          <div><dt>Species</dt><dd>{{ match.lostReport.species }}</dd></div>
+          <div><dt>Color</dt><dd>{{ match.lostReport.color }}</dd></div>
+          <div><dt>Markings</dt><dd>{{ match.lostReport.markings }}</dd></div>
+          <div *ngIf="match.lostReport.size"><dt>Size</dt><dd>{{ match.lostReport.size }}</dd></div>
+          <div *ngIf="match.lostReport.sex"><dt>Sex</dt><dd>{{ match.lostReport.sex }}</dd></div>
+          <div *ngIf="match.lostReport.description"><dt>Description</dt><dd>{{ match.lostReport.description }}</dd></div>
+          <div><dt>Location</dt><dd>{{ match.lostReport.locationName }}</dd></div>
+          <div><dt>Date lost</dt><dd>{{ match.lostReport.date }}</dd></div>
+        </dl>
+      </article>
+      <article class="report-column">
+        <p class="report-label">{{ label(match.foundReport) }}</p>
+        <figure class="photo-slot"><img class="pet-photo" [src]="imageUrl(match.foundReport.photo)" alt="Found pet report photo" /><figcaption>Found report photo</figcaption></figure>
+        <h2>{{ displayName(match.foundReport) }}</h2>
+        <dl>
+          <div><dt>Species</dt><dd>{{ match.foundReport.species }}</dd></div>
+          <div><dt>Color</dt><dd>{{ match.foundReport.color }}</dd></div>
+          <div><dt>Markings</dt><dd>{{ match.foundReport.markings }}</dd></div>
+          <div *ngIf="match.foundReport.size"><dt>Size</dt><dd>{{ match.foundReport.size }}</dd></div>
+          <div *ngIf="match.foundReport.description"><dt>Description</dt><dd>{{ match.foundReport.description }}</dd></div>
+          <div><dt>Location</dt><dd>{{ match.foundReport.locationName }}</dd></div>
+          <div><dt>Date found</dt><dd>{{ match.foundReport.date }}</dd></div>
+        </dl>
+      </article>
+    </section>
+    <section class="evidence-panel" aria-labelledby="evidence-title">
+      <div class="evidence-heading"><p class="eyebrow">Why it surfaced</p><h2 id="evidence-title">Possible match — not a confirmation.</h2><p>The system found supporting signals across the two reports. You make the final judgment.</p></div>
+      <div class="evidence-grid">
+        <div><span>Visual similarity</span><strong>{{ match.visualScore }}<small>/100</small></strong><p>The photos provide a visual similarity signal, not a probability.</p></div>
+        <div><span>Physical characteristics</span><strong>{{ match.physicalScore }}<small>/100</small></strong><p>Species, color, markings, and available size information.</p></div>
+        <div><span>Geographic proximity</span><strong>{{ match.geographicScore }}<small>/100</small></strong><p>How close the selected locations are.</p></div>
+        <div><span>Date compatibility</span><strong>{{ match.dateScore }}<small>/100</small></strong><p>Whether the found date follows the lost date.</p></div>
+      </div>
+      <ul class="explanations"><li *ngFor="let explanation of match.explanations">{{ explanation }}</li></ul>
+    </section>
+  </ng-container>
+  <ng-template #loadingState><p class="loading">{{ loading() ? 'Loading the comparison...' : error() }}</p></ng-template>
+</main>

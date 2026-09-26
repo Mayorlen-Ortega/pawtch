@@ -118,3 +118,16 @@ def matches(report_id: str) -> list[dict]:
         other = reports_by_id[other_id]
         result.append({**item, "otherReport": public_report(other)})
     return result
+
+
+@app.get("/api/matches/{match_id}")
+def get_match(match_id: str) -> dict:
+    match = next((item for item in read_matches() if item.get("id") == match_id), None)
+    if match is None:
+        raise HTTPException(status_code=404, detail="Match not found.")
+    reports_by_id = {item["id"]: item for item in read_reports()}
+    lost = reports_by_id.get(match["lostReportId"])
+    found = reports_by_id.get(match["foundReportId"])
+    if lost is None or found is None:
+        raise HTTPException(status_code=404, detail="Reports for this match were not found.")
+    return {**match, "lostReport": public_report(lost), "foundReport": public_report(found)}

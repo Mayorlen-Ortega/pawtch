@@ -35,3 +35,8 @@ export interface Match {
   explanations: string[];
   otherReport: Report;
 }
+
+export interface MatchComparison extends Omit<Match, 'otherReport'> {
+  lostReport: Report;
+  foundReport: Report;
+}

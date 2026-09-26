@@ -29,7 +29,7 @@ Build mode: learn
   Learner check: Create or load a lost report and then a compatible found report. Open the lost report detail page and inspect the possible-match card. Check that the evidence categories explain the result and that the UI says possible match or similarity, never probability or confirmation.
   Commit: `Add explainable pet matching kernel`
 
-- [ ] **3. Compare matched reports responsively**
+- [x] **3. Compare matched reports responsively**
   Becomes usable: Selecting `Compare reports` opens a readable comparison of the lost and found reports, their photos, their matching fields, and the evidence that produced the possible-match indication.
   Why now: Once the kernel is visible, this completes the human-review loop and makes the evidence useful rather than leaving it as an opaque card.
   PRD ref: `prd.md > Screens and Layout > Side-by-side comparison view`; `prd.md > Comparing reports`; `prd.md > Look and Feel`
