@@ -1,19 +1,27 @@
 <main class="page welcome-page">
-  <header class="brand"><span class="brand-mark">○</span><span>Huella Cerca</span></header>
-  <section class="welcome-copy" aria-labelledby="welcome-title">
-    <p class="eyebrow">Coquimbo, Chile</p>
-    <h1 id="welcome-title">Helping lost pets find their way home.</h1>
-    <p class="intro">Share a lost or found pet report so the right connections can surface when they matter.</p>
+  <header class="brand"><img class="brand-mark" src="/huella-mark.svg" alt="" /><span>huella</span></header>
+  <section class="welcome-layout" aria-labelledby="welcome-title">
+    <div class="welcome-main">
+      <div class="welcome-copy">
+        <p class="eyebrow">Coquimbo, Chile</p>
+        <h1 id="welcome-title">Helping lost pets find their way home.</h1>
+        <p class="intro">Share a lost or found pet report so the right connections can surface when they matter.</p>
+      </div>
+      <section class="choice-grid" aria-label="Choose a report type">
+        <a class="choice-card choice-primary" routerLink="/report/new/lost">
+          <span class="choice-icon" aria-hidden="true">↗</span>
+          <span><strong>I lost a pet</strong><small>Start a report and keep watch for a possible match.</small></span>
+        </a>
+        <a class="choice-card" routerLink="/report/new/found">
+          <span class="choice-icon" aria-hidden="true">⌂</span>
+          <span><strong>I found a pet</strong><small>Share what you can observe to help connect them.</small></span>
+        </a>
+      </section>
+      <p class="quiet-note">A local community service with technology helping quietly in the background.</p>
+    </div>
+    <figure class="hero-visual">
+      <img src="/reunion-hero.svg" alt="A dog and cat meet along a gentle path through a calm coastal landscape." />
+      <figcaption>A little closer to finding their way home.</figcaption>
+    </figure>
   </section>
-  <section class="choice-grid" aria-label="Choose a report type">
-    <a class="choice-card choice-primary" routerLink="/report/new/lost">
-      <span class="choice-icon">↗</span>
-      <span><strong>I lost a pet</strong><small>Start a report and keep watch for a possible match.</small></span>
-    </a>
-    <a class="choice-card" routerLink="/report/new/found">
-      <span class="choice-icon">⌂</span>
-      <span><strong>I found a pet</strong><small>Share what you can observe to help connect them.</small></span>
-    </a>
-  </section>
-  <p class="quiet-note">A local community service with technology helping quietly in the background.</p>
 </main>

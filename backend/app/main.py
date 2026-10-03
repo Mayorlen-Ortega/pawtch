@@ -12,7 +12,7 @@ from .locations import LOCATIONS, get_location
 from .matching import calculate_match
 from .storage import IMAGES_DIR, delete_image, ensure_storage, read_matches, read_reports, save_image, write_match, write_report
 
-app = FastAPI(title="Huella Cerca API")
+app = FastAPI(title="huella API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:4200"],

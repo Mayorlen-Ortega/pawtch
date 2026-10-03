@@ -1,6 +1,6 @@
-# Huella Cerca
+# huella
 
-Huella Cerca is a local proof of concept for lost and found pets in Coquimbo, Chile. People can create lost or found pet reports, then review explainable possible matches surfaced by the system.
+huella is a local proof of concept for lost and found pets in Coquimbo, Chile. People can create lost or found pet reports, then review explainable possible matches surfaced by the system.
 
 The project is intentionally a small local demo, not a production service. It uses Angular and TypeScript for the browser experience and a small FastAPI service for local persistence and matching.
 

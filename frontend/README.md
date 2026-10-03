@@ -1,6 +1,6 @@
-# Huella Cerca frontend
+# huella frontend
 
-This folder contains the Angular and TypeScript browser application for the Huella Cerca lost-and-found pet matching POC.
+This folder contains the Angular and TypeScript browser application for the huella lost-and-found pet matching POC.
 
 The repository root [README](../README.md) is the canonical guide for the complete project, including Python API setup, Angular setup, the live demo flow, the matching approach, local data privacy, and the POC boundaries.
 
