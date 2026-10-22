@@ -23,6 +23,14 @@ export class ApiService {
     return this.http.get<Report>(`${this.baseUrl}/reports/${id}`);
   }
 
+  resolveReport(id: string): Observable<Report> {
+    return this.http.post<Report>(`${this.baseUrl}/reports/${id}/resolve`, {});
+  }
+
+  deleteReport(id: string): Observable<{ id: string; deleted: boolean }> {
+    return this.http.delete<{ id: string; deleted: boolean }>(`${this.baseUrl}/reports/${id}`);
+  }
+
   getMatches(id: string): Observable<Match[]> {
     return this.http.get<Match[]>(`${this.baseUrl}/reports/${id}/matches`);
   }

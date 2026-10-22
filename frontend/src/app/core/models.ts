@@ -8,6 +8,8 @@ export interface LocationOption {
 export interface Report {
   id: string;
   type: ReportType;
+  status: 'active' | 'resolved';
+  resolvedAt?: string;
   photo: string;
   species: string;
   color: string;

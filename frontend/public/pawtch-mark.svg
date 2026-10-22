@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Pawtch paw print</title>
+  <circle cx="32" cy="32" r="29" fill="#DFEEE5" stroke="#4D6D5D" stroke-width="2.5"/>
+  <g transform="translate(-3 2)">
+    <ellipse cx="23" cy="27" rx="3.5" ry="4.7" transform="rotate(-27 23 27)" fill="#4D6D5D"/>
+    <ellipse cx="31" cy="20" rx="3.4" ry="4.5" transform="rotate(-10 31 20)" fill="#4D6D5D"/>
+    <ellipse cx="40" cy="20" rx="3.4" ry="4.5" transform="rotate(10 40 20)" fill="#4D6D5D"/>
+    <ellipse cx="47" cy="27" rx="3.5" ry="4.7" transform="rotate(27 47 27)" fill="#4D6D5D"/>
+    <path d="M35 45c-3-2.2-8-5.3-8-9.5a5.1 5.1 0 0 1 8-3.9 5.1 5.1 0 0 1 8 3.9c0 4.2-5 7.3-8 9.5Z" fill="#4D6D5D"/>
+  </g>
+</svg>

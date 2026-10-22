@@ -128,6 +128,8 @@ Keep the API small:
 - `GET /api/reports` returns the small report collection for the POC.
 - `POST /api/reports` accepts a multipart report payload and photo, saves the report, and calculates matches when the report type is `found`.
 - `GET /api/reports/{report_id}` returns one report.
+- `POST /api/reports/{report_id}/resolve` marks a report resolved while retaining its photo.
+- `DELETE /api/reports/{report_id}` permanently removes a report, its photo, and related matches.
 - `GET /api/reports/{report_id}/matches` returns possible matches for that report.
 - `GET /api/matches/{match_id}` returns both report summaries and the full evidence breakdown for comparison.
 - `GET /media/{filename}` serves a saved local report image.
@@ -138,7 +140,7 @@ PRD ref: `prd.md > Reporting a lost or found pet`; `prd.md > Validation and reco
 
 ### Storage service
 
-Reads and writes `reports.json` and the local images folder. Writes should be simple and safe for this single-user POC: load the current JSON, update it, and write it back. The service creates empty data files and folders on first run if they do not exist.
+Reads and writes `reports.json` and the local images folder. Resolving updates the report status and timestamp but preserves its photo; match queries ignore resolved reports. Permanent deletion removes the report, its image, and related match records. Writes should be simple and safe for this single-user POC: load the current JSON, update it, and write it back. The service creates empty data files and folders on first run if they do not exist. Legacy reports without a status are treated as active.
 
 PRD ref: `prd.md > States and Boundaries > Sample data`; `prd.md > Deferred From the POC`.
 
@@ -156,6 +158,7 @@ PRD ref: `prd.md > Possible-match discovery`; `prd.md > Product Decisions`.
 {
   "id": "report-001",
   "type": "lost",
+  "status": "active",
   "photo": "report-001.jpg",
   "species": "dog",
   "color": "brown and white",
@@ -166,11 +169,12 @@ PRD ref: `prd.md > Possible-match discovery`; `prd.md > Product Decisions`.
   "description": "optional",
   "locationId": "coquimbo-centro",
   "date": "2026-09-20",
-  "createdAt": "2026-09-25T12:00:00Z"
+  "createdAt": "2026-09-25T12:00:00Z",
+  "resolvedAt": null
 }
 ```
 
-Required values are `type`, `photo`, `species`, `color`, `markings`, `locationId`, and `date`. `name`, `sex`, `size`, and `description` are optional for lost reports; `name` and `sex` are not collected for found reports in the POC.
+`status` is `active` or `resolved`; `resolvedAt` is set when the report is resolved. Required values are `type`, `photo`, `species`, `color`, `markings`, `locationId`, and `date`. `name`, `sex`, `size`, and `description` are optional for lost reports; `name` and `sex` are not collected for found reports in the POC.
 
 ### Location
 

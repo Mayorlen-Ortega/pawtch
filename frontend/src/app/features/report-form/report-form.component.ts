@@ -53,7 +53,10 @@ export class ReportFormComponent implements OnInit {
     this.submitError = '';
     this.form.markAllAsTouched();
     if (!this.photo) this.photoError = 'Please add the clearest photo you have.';
-    if (this.form.invalid || !this.photo) return;
+    if (this.form.invalid || !this.photo) {
+      this.submitError = 'Complete the required fields and add a photo before creating your report.';
+      return;
+    }
     this.submitting = true;
     const payload = { type: this.type, ...this.form.getRawValue() };
     this.api.createReport(payload, this.photo).subscribe({

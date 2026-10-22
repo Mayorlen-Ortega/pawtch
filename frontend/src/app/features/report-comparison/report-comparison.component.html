@@ -10,7 +10,7 @@
       <article class="report-column">
         <p class="report-label">{{ label(match.lostReport) }}</p>
         <figure class="photo-slot"><img class="pet-photo" [src]="imageUrl(match.lostReport.photo)" alt="Lost pet report photo" /><figcaption>Lost report photo</figcaption></figure>
-        <h2>{{ displayName(match.lostReport) }}</h2>
+        <h2 [class.lost-report-placeholder]="!match.lostReport.name">{{ displayName(match.lostReport) }}</h2>
         <dl>
           <div><dt>Species</dt><dd>{{ match.lostReport.species }}</dd></div>
           <div><dt>Color</dt><dd>{{ match.lostReport.color }}</dd></div>
@@ -25,7 +25,7 @@
       <article class="report-column">
         <p class="report-label">{{ label(match.foundReport) }}</p>
         <figure class="photo-slot"><img class="pet-photo" [src]="imageUrl(match.foundReport.photo)" alt="Found pet report photo" /><figcaption>Found report photo</figcaption></figure>
-        <h2>{{ displayName(match.foundReport) }}</h2>
+        <h2 [class.found-report-placeholder]="!match.foundReport.name">{{ displayName(match.foundReport) }}</h2>
         <dl>
           <div><dt>Species</dt><dd>{{ match.foundReport.species }}</dd></div>
           <div><dt>Color</dt><dd>{{ match.foundReport.color }}</dd></div>

@@ -1,6 +1,6 @@
-# huella
+# Pawtch
 
-huella is a local proof of concept for lost and found pets in Coquimbo, Chile. People can create lost or found pet reports, then review explainable possible matches surfaced by the system.
+Pawtch is a local proof of concept for lost and found pets in Coquimbo, Chile. People can create lost or found pet reports, then review explainable possible matches surfaced by the system.
 
 The project is intentionally a small local demo, not a production service. It uses Angular and TypeScript for the browser experience and a small FastAPI service for local persistence and matching.
 
@@ -86,6 +86,8 @@ Reports and uploaded images are stored locally under `backend/data/` for this de
 - `matches.json` stores calculated match explanations.
 - `images/` stores uploaded photos.
 
+Reports can be marked resolved, which keeps their details and photos but excludes them from possible matches. Permanent deletion is a separate confirmed action that removes the report, its photo, and related matches. Since the POC has no accounts, anyone with access to the local app can use these actions; this is not an authorization model for a public deployment.
+
 These runtime files are ignored by Git. The repository also ignores the Python virtual environment, Angular dependencies and build output, Python bytecode, model caches, `.env` files, and the personal `devpost/learner-profile.md` file. A secret-free `.env.example` remains allowed.
 
 Do not add real personal reports or private pet photos to Git. Before publishing, inspect `git status` and the staged file list.
@@ -116,7 +118,7 @@ Set-Location frontend
 npm run build
 ```
 
-The representative matching tests cover compatible reports, incompatible species, dates before the lost report, and geographic weakness.
+The backend tests cover matching policy, report lifecycle behavior, and safe image/match cleanup using temporary test data.
 
 ## Intentionally Outside The POC
 

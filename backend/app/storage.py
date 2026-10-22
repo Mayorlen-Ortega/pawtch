@@ -42,6 +42,36 @@ def write_report(report: dict) -> None:
     write_json(REPORTS_FILE, reports)
 
 
+def update_report(report_id: str, updates: dict) -> dict | None:
+    reports = read_reports()
+    report = next((item for item in reports if item.get("id") == report_id), None)
+    if report is None:
+        return None
+    report.update(updates)
+    write_json(REPORTS_FILE, reports)
+    return report
+
+
+def delete_report(report_id: str) -> dict | None:
+    reports = read_reports()
+    report = next((item for item in reports if item.get("id") == report_id), None)
+    if report is None:
+        return None
+
+    write_json(REPORTS_FILE, [item for item in reports if item.get("id") != report_id])
+    write_json(
+        MATCHES_FILE,
+        [
+            item for item in read_matches()
+            if item.get("lostReportId") != report_id and item.get("foundReportId") != report_id
+        ],
+    )
+    filename = report.get("photoPath") or report.get("photo")
+    if isinstance(filename, str):
+        delete_image(filename)
+    return report
+
+
 def save_image(filename: str, contents: bytes) -> str:
     safe_name = f"{uuid4().hex}_{Path(filename).name}"
     (IMAGES_DIR / safe_name).write_bytes(contents)
@@ -49,7 +79,8 @@ def save_image(filename: str, contents: bytes) -> str:
 
 
 def delete_image(filename: str) -> None:
-    (IMAGES_DIR / filename).unlink(missing_ok=True)
+    if Path(filename).name == filename:
+        (IMAGES_DIR / filename).unlink(missing_ok=True)
 
 
 def read_matches() -> list[dict]:

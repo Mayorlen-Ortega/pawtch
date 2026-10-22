@@ -166,6 +166,20 @@ Acceptance criteria:
 
 Source: `scope.md > The POC Boundary`.
 
+### Report resolution and removal
+
+Either reporter can mark a lost- or found-pet report as resolved when the pet has been reunited or the case is otherwise closed. A resolved report stays available for review with its photo, but it is removed from possible-match results and cannot create new matches. Permanent deletion is a separate, explicitly confirmed action that removes the report, its photo, and its related match records.
+
+The POC has no accounts or report ownership. Anyone with access to the local demo can use these actions; they are not owner authorization for a public deployment.
+
+Acceptance criteria:
+
+- [ ] Lost and found reports can both be marked resolved.
+- [ ] A resolved report remains viewable with its photo but is excluded from new and existing possible matches.
+- [ ] Permanently deleting a report requires confirmation and removes its photo and related matches without deleting other reports or images.
+
+Source: `scope.md > The POC Boundary`; clarified during implementation.
+
 ## States and Boundaries
 
 - **First use** — The welcome screen explains the purpose and presents the two report paths without requiring an account.
@@ -176,6 +190,8 @@ Source: `scope.md > The POC Boundary`.
 - **No possible matches** — The report remains visible with `No possible matches yet` and a future-looking explanation.
 - **Possible match** — A prominent, calm card presents the other photo, similarity or match indication, and evidence summary.
 - **Comparison** — Both reports and the evidence are available for human inspection.
+- **Resolved report** — The report and photo remain viewable, but the case is removed from possible matches.
+- **Delete confirmation** — The user confirms permanent removal of the report, its image, and related match records.
 - **No account or production notification state** — The POC does not require identity, contact, or notification workflows.
 - **Sample data** — The demo may create reports during the flow or use already available sample data; it must not require account setup or a complete publishing workflow to demonstrate the match.
 
@@ -187,6 +203,8 @@ Source: `scope.md > The POC Boundary`.
 - The lost-pet form may ask for a name, but the found-pet form does not — a finder usually cannot know the pet's name.
 - The forms are single-page rather than multi-step — someone worried about a missing pet should be able to submit quickly.
 - Match suggestions explain their evidence and remain non-definitive — the person makes the final judgment.
+- Resolving a report preserves it for review but removes it from matching; permanent deletion is separate and removes associated local data.
+- Lifecycle actions are available to anyone with access in this local POC because account ownership is out of scope.
 - The POC uses a similarity or match indication rather than a confidence score — the result is not calibrated statistical certainty.
 - Real accounts, deployment, production notifications, and lifecycle follow-up are outside the POC — the one-minute demo should prove the matching experience without unnecessary workflow infrastructure.
 - The interface uses a warm, calm, natural community-service direction — the technology should help quietly in the background.
@@ -207,7 +225,7 @@ A responsive web POC for Coquimbo that:
 
 - Accounts, identity, and saved personal report collections are deferred because the demo can use sample data without user management.
 - Real contact and notification delivery are deferred because production communication channels are not needed to demonstrate matching.
-- Report resolution follow-ups and archiving are deferred because they are database-lifecycle workflows beyond the core lost-to-found match.
+- Automated resolution follow-ups and archiving are deferred; reporters can manually resolve or delete a case in the POC.
 - Broad geographic coverage is deferred because the first proof is focused on Coquimbo.
 
 ## Possible Later Enhancements

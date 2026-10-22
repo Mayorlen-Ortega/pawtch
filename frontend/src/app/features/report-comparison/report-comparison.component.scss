@@ -11,6 +11,7 @@ h1 { margin: .65rem 0 .7rem; font-size: clamp(2.15rem, 4vw, 3.6rem); line-height
 .pet-photo { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .75rem; background: var(--blue-soft); }
 figcaption { margin-top: .55rem; color: var(--muted); font-size: .78rem; font-weight: 700; }
 .report-column h2 { margin: .9rem .25rem; font-size: 1.3rem; }
+.report-column h2.lost-report-placeholder, .report-column h2.found-report-placeholder { display: inline-block; padding: .3rem .45rem; border-radius: .4rem; background: var(--green-deep); color: #fff; }
 dl { margin: 0; }
 dl div { display: grid; grid-template-columns: 7.25rem minmax(0, 1fr); gap: .65rem; padding: .55rem .25rem; border-top: 1px solid var(--line); }
 dt { color: var(--muted); font-size: .8rem; font-weight: 700; }
