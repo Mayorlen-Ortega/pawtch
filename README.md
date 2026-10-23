@@ -4,6 +4,10 @@ Pawtch is a local proof of concept for lost and found pets in Coquimbo, Chile. P
 
 The project is intentionally a small local demo, not a production service. It uses Angular and TypeScript for the browser experience and a small FastAPI service for local persistence and matching.
 
+## Build Process
+
+Pawtch was planned and built with the Devpost Learn Skill Pack and GitHub Copilot. The repository includes the Skill Pack lockfile and its planning artifacts: [scope](devpost/scope.md), [PRD](devpost/prd.md), and [technical spec](devpost/spec.md).
+
 ## What The Demo Shows
 
 1. Open the app and choose `I lost a pet`.
@@ -100,6 +104,7 @@ backend/app/    FastAPI routes, storage, embeddings, and matching
 backend/tests/  Focused matching policy tests
 backend/data/   Local runtime data, ignored by Git
 devpost/        Approved scope, PRD, spec, and build checklist
+src/            Unused starter scaffold; not part of the Pawtch application
 ```
 
 ## Verification
@@ -119,6 +124,10 @@ npm run build
 ```
 
 The backend tests cover matching policy, report lifecycle behavior, and safe image/match cleanup using temporary test data.
+
+## Hackathon Submission
+
+The Devpost rules require a demo video under three minutes, made public on YouTube or Vimeo and linked in the submission. Pawtch runs locally, so a hosted deployment is not required.
 
 ## Intentionally Outside The POC
 
